@@ -6,9 +6,9 @@ You can include them into your components or stores like this:
 let react = require('react/addons');
 let MySource = require('sources/MyAction');
 class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    MySource.getRemoteData();
-  }
+	constructor(props) {
+		super(props);
+		MySource.getRemoteData();
+	}
 }
 ```

@@ -6,9 +6,9 @@ You can include them into your components like this:
 let react = require('react/addons');
 let MyStore = require('stores/MyStore');
 class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    MyStore.doSomething();
-  }
+	constructor(props) {
+		super(props);
+		MyStore.doSomething();
+	}
 }
 ```
