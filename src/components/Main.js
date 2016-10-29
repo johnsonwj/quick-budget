@@ -1,19 +1,39 @@
-require('normalize.css/normalize.css');
-require('skeleton-css/css/skeleton.css')
-require('styles/base.scss');
+import React, { PropTypes } from 'react';
+import AltContainer from 'alt-container';
 
-import React from 'react';
-
+import IntroPage from './IntroPage';
 import BudgetBar from './BudgetBar';
+import ViewStore from '../stores/ViewStore';
+import Views from '../data/Views';
 
-export default class AppComponent extends React.Component {
-	render() {
-		return (
-			<div id="app">
-				<BudgetBar />
-				Herro
-			</div>
-		);
+const propTypes = {
+	View: PropTypes.object
+};
+
+export function QuickBudget(props) {
+	const { view } = props;
+
+	let appComponent;
+	switch (view) {
+	case Views.Intro:
+		appComponent = <IntroPage />;
+		break;
+	default:
+		appComponent = <BudgetBar />;
 	}
+
+	return <div id="app">{appComponent}</div>;
+}
+
+QuickBudget.propTypes = propTypes;
+
+export default function FluxedQuickBudget() {
+	return (
+		<AltContainer	stores={
+			{ view: () => ({ store: ViewStore, value: ViewStore.getState().view }) }
+		}>
+			<QuickBudget />
+		</AltContainer>
+	);
 }
  
