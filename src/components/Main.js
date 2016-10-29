@@ -1,22 +1,19 @@
 require('normalize.css/normalize.css');
-require('styles/App.css');
+require('skeleton-css/css/skeleton.css')
+require('styles/base.scss');
 
 import React from 'react';
 
-let yeomanImage = require('../images/yeoman.png');
+import BudgetBar from './BudgetBar';
 
-class AppComponent extends React.Component {
+export default class AppComponent extends React.Component {
 	render() {
 		return (
-			<div className="index">
-				<img src={yeomanImage} alt="Yeoman Generator" />
-				<div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
+			<div id="app">
+				<BudgetBar />
+				Herro
 			</div>
 		);
 	}
 }
-
-AppComponent.defaultProps = {
-};
-
-export default AppComponent;
+ 

@@ -1,0 +1,24 @@
+#fixed-income, #budget-bar.positive > #fixed-difference { background-color: #208300; }
+#variable-income, #budget-bar.positive > #variable-difference { background-color: #34d800; }
+#fixed-expense, #budget-bar.negative > #fixed-difference { background-color: #f30021; }
+#variable-expense, #budget-bar.negative > #variable-difference { background-color: #ff6400; }
+#savings { background-color: #00a383; }
+
+#budget-bar {
+	width: 90vw;
+	height: 50px;
+	border-radius: 10px;
+	display: flex;
+	flex-flow: row wrap;
+	
+	// for negative, make sure the -difference boxes are directly after -income
+	&.negative {
+		#fixed-income { order: 0 }
+		#variable-income { order: 1 }
+		#fixed-difference { order: 2 }
+		#variable-difference { order: 3 }
+		#fixed-expense { order: 4 }
+		#variable-expense { order: 5 }
+		#savings { order: 6 }
+	}
+}
