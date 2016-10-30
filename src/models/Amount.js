@@ -11,7 +11,14 @@ export default class Amount {
 		} else {
 			const pieces = _.split(amtString, '.');
 			this.dollars = parseInt(pieces[0] || '0');
-			this.cents = parseInt(pieces[1] || '0');
+
+			// in order to prevent losing leading zeroes (which are significant), stick a 1 in front
+			// and subtract it off again after parsing. Add zeroes on the end to avoid edge cases.
+			const centsString = `1${pieces[1]}00`;
+			// negative round!
+			const roundedCents = _.round(parseInt(centsString), 3 - centsString.length);
+			const floored = _.floor(roundedCents / Math.pow(10, (centsString.length - 3)));
+			this.cents = floored - 100;
 		}
 	}
 
