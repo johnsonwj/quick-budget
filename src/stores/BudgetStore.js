@@ -19,18 +19,16 @@ export class BudgetStoreModel {
 		this.bindActions(BudgetActions);
 	}
 
-	onAddItem(listName) {
-		this.lists[listName].push(emptyItem());
-	}
-
 	onChangeItemName(itemInfo) {
-		const { listName, index, name } = itemInfo;
+		const { listName, index, name, addNewItem } = itemInfo;
 		this.lists[listName][index].name = name;
+		if (addNewItem) this.lists[listName].push(emptyItem());
 	}
 
 	onChangeItemAmount(itemInfo) {
-		const { listName, index, amount } = itemInfo;
+		const { listName, index, amount, addNewItem } = itemInfo;
 		this.lists[listName][index].amount = amount;
+		if (addNewItem) this.lists[listName].push(emptyItem());
 	}
 }
 

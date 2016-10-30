@@ -32,17 +32,16 @@ export default class BudgetListItem extends React.Component {
 
 	/*
 	 * TODO:
-	 *   change name of this item in addition to creating a new one when this is the last item
 	 *   what the hell is up with amount changing
 	 */
 
 	handleNameBlur() {
 		const { index, listName, isLast } = this.props;
 		const newName = this.state.tempNameText;
-		if (isLast && _.some(this.state.tempNameText))
-			BudgetActions.addItem(listName);
-		else if (!isLast)
-			BudgetActions.changeItemName({ listName, index, name: newName });
+		const empty = _.isEmpty(newName);
+
+		if (isLast && empty) return;
+		BudgetActions.changeItemName({ listName, index, name: newName, addNewItem: isLast });
 		this.setState({ tempNameText: '' });
 	}
 
@@ -53,10 +52,10 @@ export default class BudgetListItem extends React.Component {
 	handleAmountBlur() {
 		const { index, listName, isLast } = this.props;
 		const newAmount = new Amount(_.trimStart(this.state.tempAmountText, '$'));
-		if (isLast && _.some(this.state.tempAmountText))
-			BudgetActions.addItem(listName);
-		else if (!isLast)
-			BudgetActions.changeItemAmount({ listName, index, amount: newAmount });
+		const empty = _.isEmpty(this.state.tempAmountText);
+
+		if (isLast && empty) return;
+		BudgetActions.changeItemAmount({ listName, index, amount: newAmount, addNewItem: isLast });
 		this.setState({ tempAmountText: '' });
 	}
 
@@ -75,6 +74,7 @@ export default class BudgetListItem extends React.Component {
 						placeholder="Name"
 						value={tempNameText || name || ''}
 						onChange={(e) => this.handleChangeName(e.target.value)}
+						onFocus={() => this.setState({ tempNameText: name || '' })}
 						onBlur={() => this.handleNameBlur()}
 					/>
 				</div>
@@ -84,6 +84,7 @@ export default class BudgetListItem extends React.Component {
 						placeholder={new Amount().toString()}
 						value={tempAmountText || amount ? amount.toString() : ''}
 						onChange={(e) => this.handleChangeAmount(e.target.value)}
+						onFocus={() => this.setState({ tempAmountText: amount ? amount.toString() : '' })}
 						onBlur={() => this.handleAmountBlur()}
 					/>
 				</div>
