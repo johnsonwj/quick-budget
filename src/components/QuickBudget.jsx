@@ -13,7 +13,7 @@ export default function QuickBudget() {
 			<BudgetBar />
 			<BudgetListView listName="incomeFixed" />
 		</div>
-	)
+	);
 }
 
 QuickBudget.propTypes = propTypes;

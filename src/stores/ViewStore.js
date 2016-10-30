@@ -1,4 +1,4 @@
-import alt from 'components/Dispatcher';
+import alt from '../components/Dispatcher';
 
 import ViewActions from '../actions/ViewActions';
 import Views from '../data/Views';

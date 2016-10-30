@@ -1,2 +1,3 @@
-import alt from 'components/Dispatcher';
+import alt from '../components/Dispatcher';
+
 export default alt.generateActions(['changeView']);

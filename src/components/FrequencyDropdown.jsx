@@ -16,7 +16,7 @@ export default function FrequencyDropdown(props) {
 		<select className="frequency-dropdown" defaultValue={Frequencies.Monthly} selected={frequency}>
 			{options}
 		</select>
-	)
+	);
 }
 
 FrequencyDropdown.propTypes = propTypes;
