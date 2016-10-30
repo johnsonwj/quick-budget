@@ -30,11 +30,6 @@ export default class BudgetListItem extends React.Component {
 		this.setState({ tempNameText: newValue });
 	}
 
-	/*
-	 * TODO:
-	 *   what the hell is up with amount changing
-	 */
-
 	handleNameBlur() {
 		const { index, listName, isLast } = this.props;
 		const newName = this.state.tempNameText;
@@ -82,7 +77,7 @@ export default class BudgetListItem extends React.Component {
 					<input
 						type="text"
 						placeholder={new Amount().toString()}
-						value={tempAmountText || amount ? amount.toString() : ''}
+						value={tempAmountText || (amount ? amount.toString() : '')}
 						onChange={(e) => this.handleChangeAmount(e.target.value)}
 						onFocus={() => this.setState({ tempAmountText: amount ? amount.toString() : '' })}
 						onBlur={() => this.handleAmountBlur()}
