@@ -8,6 +8,10 @@ require('normalize.css/normalize.css');
 require('skeleton-css/css/skeleton.css');
 require('./styles/base.scss');
 
+require('normalize.css/normalize.css');
+require('skeleton-css/css/skeleton.css');
+require('./styles/base.scss');
+
 // Render the main component into the dom
 // eslint-disable-next-line react/jsx-filename-extension
 ReactDOM.render(<App />, document.getElementById('app'));
