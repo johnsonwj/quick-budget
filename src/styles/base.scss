@@ -1,2 +1,9 @@
 @import 'intro-page';
 @import 'budget-bar';
+@import 'budget-list-view';
+
+#quick-budget {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}

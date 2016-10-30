@@ -1,0 +1,19 @@
+.budget-list-view {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+
+	.budget-list-item {
+		display: flex;
+		flex-flow: row;
+
+		input, select { margin: 0px; }
+		input[type="text"] { border: none; }
+		.item-name, .item-amount {
+			margin-right: 10px;
+			border-bottom: 1px solid lightgray;
+
+			&.isEmpty { color: lightgray; }
+		}
+	}
+}

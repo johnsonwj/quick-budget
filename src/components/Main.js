@@ -2,15 +2,15 @@ import React, { PropTypes } from 'react';
 import AltContainer from 'alt-container';
 
 import IntroPage from './IntroPage';
-import BudgetBar from './BudgetBar';
+import QuickBudget from './QuickBudget';
 import ViewStore from '../stores/ViewStore';
 import Views from '../data/Views';
 
 const propTypes = {
-	View: PropTypes.object
+	view: PropTypes.string.isRequired
 };
 
-export function QuickBudget(props) {
+export function App(props) {
 	const { view } = props;
 
 	let appComponent;
@@ -19,21 +19,22 @@ export function QuickBudget(props) {
 		appComponent = <IntroPage />;
 		break;
 	default:
-		appComponent = <BudgetBar />;
+		appComponent = <QuickBudget {...props} />;
 	}
 
 	return <div id="app">{appComponent}</div>;
 }
 
-QuickBudget.propTypes = propTypes;
+App.propTypes = propTypes;
 
-export default function FluxedQuickBudget() {
+export default function FluxedApp() {
 	return (
-		<AltContainer	stores={
-			{ view: () => ({ store: ViewStore, value: ViewStore.getState().view }) }
-		}>
-			<QuickBudget />
-		</AltContainer>
+		<AltContainer
+			stores={{
+				view: () => ({ store: ViewStore, value: ViewStore.getState().view })
+			}}
+			component={App}
+		/>
 	);
 }
  
