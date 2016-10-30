@@ -1,8 +1,8 @@
-'use strict';
+
 
 import baseConfig from './base';
 
-let config = {
+const config = {
 	appEnv: 'test'  // don't remove the appEnv property here
 };
 

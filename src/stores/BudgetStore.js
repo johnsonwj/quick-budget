@@ -12,7 +12,7 @@ export class BudgetStoreModel {
 			incomeVariable: [emptyItem()],
 			expensesFixed: [emptyItem()],
 			expensesVariable: [emptyItem()]
-		}
+		};
 
 		this.savings = 0;
 

@@ -6,10 +6,11 @@ import BudgetStore from '../stores/BudgetStore';
 import BudgetListItem from './BudgetListItem';
 
 const unfluxedPropTypes = {
-	items: PropTypes.arrayOf(PropTypes.object)
-}
+	items: PropTypes.arrayOf(PropTypes.object),
+	listName: PropTypes.string.isRequired
+};
 
-export function BudgetListView(props) {
+function BudgetListView(props) {
 	const { items, listName } = props;
 
 	const renderedItems = _.map(items, (item, idx) =>
@@ -26,8 +27,9 @@ export function BudgetListView(props) {
 		<div className="budget-list-view">
 			{renderedItems}
 		</div>
-	)
+	);
 }
+export { BudgetListView as ControlledBudgetListView };
 
 const fluxedPropTypes = {
 	listName: PropTypes.string.isRequired
@@ -42,7 +44,7 @@ export default function FluxedBudgetListView(props) {
 		>
 			<BudgetListView {...props} />
 		</AltContainer>
-	)
+	);
 }
 
 BudgetListView.propTypes = unfluxedPropTypes;

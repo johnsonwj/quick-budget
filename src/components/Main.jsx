@@ -10,7 +10,7 @@ const propTypes = {
 	view: PropTypes.string.isRequired
 };
 
-export function App(props) {
+function App(props) {
 	const { view } = props;
 
 	let appComponent;
@@ -24,6 +24,7 @@ export function App(props) {
 
 	return <div id="app">{appComponent}</div>;
 }
+export { App as ControlledApp };
 
 App.propTypes = propTypes;
 
@@ -37,4 +38,4 @@ export default function FluxedApp() {
 		/>
 	);
 }
- 
+
