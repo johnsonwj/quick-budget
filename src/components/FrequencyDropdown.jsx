@@ -8,8 +8,8 @@ const propTypes = { frequency: PropTypes.string };
 export default function FrequencyDropdown(props) {
 	const { frequency } = props;
 
-	const options = _.map(Frequencies, val =>
-		<option value={val} key={val}>{val}</option>
+	const options = _.map(Frequencies, (val, key) =>
+		<option value={val} key={val}>{key}</option>
 	);
 
 	return (

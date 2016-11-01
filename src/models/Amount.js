@@ -25,4 +25,8 @@ export default class Amount {
 	toString() {
 		return `$${(this.dollars + (this.cents / 100)).toFixed(2)}`;
 	}
+
+	toNumber() {
+		return this.dollars + (this.cents / 100);
+	}
 }

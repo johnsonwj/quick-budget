@@ -1,5 +1,6 @@
 export default {
-	Weekly: 'Weekly',
-	Monthly: 'Monthly',
-	Yearly: 'Yearly'
+	Weekly: 0,
+	Semimonthly: 1,
+	Monthly: 2,
+	Yearly: 3
 };
