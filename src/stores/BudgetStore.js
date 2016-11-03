@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import alt from '../components/Dispatcher';
 import BudgetActions from '../actions/BudgetActions';
 
@@ -7,16 +9,18 @@ import Frequencies from '../data/Frequencies';
 
 function emptyItem() {
 	const emptyAmount = new Amount();
-	return { name: '', rate: new DollarRate(emptyAmount, Frequencies.Monthly) };
+	return {
+		name: '',
+		rate: new DollarRate(emptyAmount, Frequencies.Monthly),
+		isVariable: false
+	};
 }
 
 export class BudgetStoreModel {
 	constructor() {
 		this.lists = {
-			incomeFixed: [emptyItem()],
-			incomeVariable: [emptyItem()],
-			expensesFixed: [emptyItem()],
-			expensesVariable: [emptyItem()]
+			income: [emptyItem()],
+			expenses: [emptyItem()]
 		};
 
 		this.savings = 0;
@@ -41,6 +45,19 @@ export class BudgetStoreModel {
 		const item = this.lists[listName][index];
 		item.rate = item.rate.withFrequency(frequency);
 		if (addNewItem) this.lists[listName].push(emptyItem());
+	}
+
+	onToggleItemVariable(itemInfo) {
+		const { listName, index, addNewItem } = itemInfo;
+		const item = this.lists[listName][index];
+		item.isVariable = !item.isVariable;
+		if (addNewItem) this.lists[listName].push(emptyItem());
+	}
+
+	onRemoveItem(itemInfo) {
+		const { listName, index } = itemInfo;
+		if (this.lists[listName].length > 1)
+			this.lists[listName] = _.filter(this.lists[listName], (item, idx) => idx !== index);
 	}
 }
 

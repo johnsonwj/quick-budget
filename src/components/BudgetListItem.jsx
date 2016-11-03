@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import _ from 'lodash';
+import Icon from 'react-fontawesome';
 
 import Amount from '../models/Amount';
 import DollarRate from '../models/DollarRate';
@@ -29,6 +30,7 @@ export default class BudgetListItem extends React.Component {
 		this.handleChangeAmount = this.handleChangeAmount.bind(this);
 		this.handleAmountBlur = this.handleAmountBlur.bind(this);
 		this.handleChangeFrequency = this.handleChangeFrequency.bind(this);
+		this.handleVariableToggle = this.handleVariableToggle.bind(this);
 	}
 
 	handleChangeName(newValue) {
@@ -69,16 +71,31 @@ export default class BudgetListItem extends React.Component {
 		});
 	}
 
+	handleVariableToggle() {
+		const { index, listName, isLast } = this.props;
+		BudgetActions.toggleItemVariable({
+			listName,
+			index,
+			addNewItem: isLast
+		});
+	}
+
 	render() {
-		const { item } = this.props;
-		const { name, rate } = item || {};
+		const { item, listName, index } = this.props;
+		const { name, rate, isVariable } = item || {};
 		const { amount, frequency } = rate || {};
 		const { tempNameText, tempAmountText } = this.state;
 
 		const getCssClass = part => `item-${part}`;
+		const checkboxId = `variable-checkbox-${listName}-${index}`;
 
 		return (
 			<div className="budget-list-item">
+				<Icon
+					name="times"
+					className={getCssClass('remove')}
+					onClick={() => BudgetActions.removeItem({ listName, index })}
+				/>
 				<div className={getCssClass('name')}>
 					<input
 						type="text"
@@ -103,6 +120,15 @@ export default class BudgetListItem extends React.Component {
 					{...{ frequency }}
 					onChangeFrequency={this.handleChangeFrequency}
 				/>
+				<label htmlFor={checkboxId} className={getCssClass('variable')}>
+					<input
+						id={checkboxId}
+						type="checkbox"
+						checked={isVariable}
+						onChange={() => this.handleVariableToggle()}
+					/>
+					Variable
+				</label>
 			</div>
 		);
 	}

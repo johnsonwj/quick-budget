@@ -1,4 +1,5 @@
 export default {
 	Intro: 'intro',
-	Income: 'income'
+	Income: 'income',
+	Expenses: 'expenses'
 };

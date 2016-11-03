@@ -1,11 +1,16 @@
 .budget-list-view {
+	// flex: 1 1 100px;
+
 	display: flex;
 	flex-flow: column;
 	align-items: center;
 
+	.title { margin: 50px 0px; }
+
 	.budget-list-item {
 		display: flex;
 		flex-flow: row;
+		align-items: center;
 
 		input, select { margin: 0px; }
 		input[type="text"] { border: none; }
@@ -14,6 +19,20 @@
 			border-bottom: 1px solid lightgray;
 
 			&.isEmpty { color: lightgray; }
+		}
+		label {
+			margin: 0px;
+			margin-left: 10px;
+			> input { margin-right: 5px; }
+
+			display: flex;
+			flex-flow: row;
+			align-items: center;
+		}
+
+		.item-remove {
+			cursor: pointer;
+			margin-right: 10px;
 		}
 	}
 }

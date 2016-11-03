@@ -13,6 +13,11 @@ const unfluxedPropTypes = {
 function BudgetListView(props) {
 	const { items, listName } = props;
 
+	const title = {
+		income: 'Step 1: Income',
+		expenses: 'Step 2: Expenses'
+	}[listName];
+
 	const renderedItems = _.map(items, (item, idx) =>
 		<BudgetListItem
 			key={idx}
@@ -25,6 +30,7 @@ function BudgetListView(props) {
 
 	return (
 		<div className="budget-list-view">
+			<h3 className="title">{title}</h3>
 			{renderedItems}
 		</div>
 	);
