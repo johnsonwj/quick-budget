@@ -127,7 +127,7 @@ export default class BudgetListItem extends React.Component {
 						checked={isVariable}
 						onChange={() => this.handleVariableToggle()}
 					/>
-					Variable
+					<span className="label-body">Variable</span>
 				</label>
 			</div>
 		);
