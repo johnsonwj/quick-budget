@@ -2,8 +2,13 @@ import alt from '../components/Dispatcher';
 import BudgetActions from '../actions/BudgetActions';
 
 import Amount from '../models/Amount';
+import DollarRate from '../models/DollarRate';
+import Frequencies from '../data/Frequencies';
 
-function emptyItem() { return { name: '', amount: new Amount() }; }
+function emptyItem() {
+	const emptyAmount = new Amount();
+	return { name: '', rate: new DollarRate(emptyAmount, Frequencies.Monthly) };
+}
 
 export class BudgetStoreModel {
 	constructor() {
@@ -27,7 +32,14 @@ export class BudgetStoreModel {
 
 	onChangeItemAmount(itemInfo) {
 		const { listName, index, amount, addNewItem } = itemInfo;
-		this.lists[listName][index].amount = amount;
+		this.lists[listName][index].rate.amount = amount;
+		if (addNewItem) this.lists[listName].push(emptyItem());
+	}
+
+	onChangeItemFrequency(itemInfo) {
+		const { listName, index, frequency, addNewItem } = itemInfo;
+		const item = this.lists[listName][index];
+		item.rate = item.rate.withFrequency(frequency);
 		if (addNewItem) this.lists[listName].push(emptyItem());
 	}
 }

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import _ from 'lodash';
 
 import Amount from '../models/Amount';
+import DollarRate from '../models/DollarRate';
 import BudgetActions from '../actions/BudgetActions';
 import FrequencyDropdown from './FrequencyDropdown';
 
@@ -9,8 +10,7 @@ export default class BudgetListItem extends React.Component {
 	static propTypes = {
 		item: PropTypes.shape({
 			name: PropTypes.string,
-			amount: PropTypes.instanceOf(Amount),
-			frequency: PropTypes.string
+			rate: PropTypes.instanceOf(DollarRate)
 		}),
 		index: PropTypes.number,
 		listName: PropTypes.string.isRequired,
@@ -28,6 +28,7 @@ export default class BudgetListItem extends React.Component {
 		this.handleNameBlur = this.handleNameBlur.bind(this);
 		this.handleChangeAmount = this.handleChangeAmount.bind(this);
 		this.handleAmountBlur = this.handleAmountBlur.bind(this);
+		this.handleChangeFrequency = this.handleChangeFrequency.bind(this);
 	}
 
 	handleChangeName(newValue) {
@@ -58,9 +59,20 @@ export default class BudgetListItem extends React.Component {
 		this.setState({ tempAmountText: '' });
 	}
 
+	handleChangeFrequency(newFrequency) {
+		const { index, listName, isLast } = this.props;
+		BudgetActions.changeItemFrequency({
+			listName,
+			index,
+			frequency: newFrequency,
+			addNewItem: isLast
+		});
+	}
+
 	render() {
 		const { item } = this.props;
-		const { name, amount, frequency } = item || {};
+		const { name, rate } = item || {};
+		const { amount, frequency } = rate || {};
 		const { tempNameText, tempAmountText } = this.state;
 
 		const getCssClass = part => `item-${part}`;
@@ -87,7 +99,10 @@ export default class BudgetListItem extends React.Component {
 						onBlur={() => this.handleAmountBlur()}
 					/>
 				</div>
-				<FrequencyDropdown {...{ frequency }} />
+				<FrequencyDropdown
+					{...{ frequency }}
+					onChangeFrequency={this.handleChangeFrequency}
+				/>
 			</div>
 		);
 	}

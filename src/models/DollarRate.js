@@ -1,3 +1,5 @@
+import Amount from './Amount';
+
 const DAYS_PER_WEEK = 7;
 const DAYS_PER_YEAR = 365.25;
 const MONTHS_PER_YEAR = 12;
@@ -14,7 +16,7 @@ const conversions = [
 	[1 / weeksPerYear, 1 / (2 * MONTHS_PER_YEAR), 1 / MONTHS_PER_YEAR, 1]
 ];
 
-export default class AmountFrequency {
+export default class DollarRate {
 	constructor(amount, frequency) {
 		this.amount = amount;
 		this.frequency = frequency;
@@ -22,7 +24,7 @@ export default class AmountFrequency {
 
 	withFrequency(freq) {
 		const newAmt = this.amount.toNumber() * conversions[this.frequency][freq];
-		return new AmountFrequency(`${newAmt}`);
+		return new DollarRate(new Amount(`${newAmt}`), freq);
 	}
 }
 

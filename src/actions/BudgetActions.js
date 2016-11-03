@@ -1,3 +1,3 @@
 import alt from '../components/Dispatcher';
 
-export default alt.generateActions('changeItemName', 'changeItemAmount');
+export default alt.generateActions('changeItemName', 'changeItemAmount', 'changeItemFrequency');

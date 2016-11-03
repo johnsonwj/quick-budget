@@ -3,7 +3,10 @@ import _ from 'lodash';
 
 import Frequencies from '../data/Frequencies';
 
-const propTypes = { frequency: PropTypes.string };
+const propTypes = {
+	frequency: PropTypes.number.isRequired,
+	onChangeFrequency: PropTypes.func.isRequired
+};
 
 export default function FrequencyDropdown(props) {
 	const { frequency } = props;
@@ -13,7 +16,11 @@ export default function FrequencyDropdown(props) {
 	);
 
 	return (
-		<select className="frequency-dropdown" defaultValue={Frequencies.Monthly} selected={frequency}>
+		<select
+			className="frequency-dropdown"
+			value={frequency}
+			onChange={e => props.onChangeFrequency(+e.target.value)}
+		>
 			{options}
 		</select>
 	);
