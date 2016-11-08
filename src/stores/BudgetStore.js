@@ -1,3 +1,4 @@
+import { PropTypes } from 'react';
 import _ from 'lodash';
 
 import alt from '../components/Dispatcher';
@@ -62,3 +63,8 @@ export class BudgetStoreModel {
 }
 
 export default alt.createStore(BudgetStoreModel, 'BudgetStore');
+
+export const BudgetItemShape = {
+	name: PropTypes.string,
+	rate: PropTypes.instanceOf(DollarRate)
+};

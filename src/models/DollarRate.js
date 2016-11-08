@@ -27,4 +27,3 @@ export default class DollarRate {
 		return new DollarRate(new Amount(`${newAmt}`), freq);
 	}
 }
-
