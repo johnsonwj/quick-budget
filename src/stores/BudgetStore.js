@@ -44,7 +44,7 @@ export class BudgetStoreModel {
 	onChangeItemFrequency(itemInfo) {
 		const { listName, index, frequency, addNewItem } = itemInfo;
 		const item = this.lists[listName][index];
-		item.rate = item.rate.withFrequency(frequency);
+		item.rate.frequency = frequency;
 		if (addNewItem) this.lists[listName].push(emptyItem());
 	}
 
